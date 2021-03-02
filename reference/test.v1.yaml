@@ -151,6 +151,86 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'Check switching status through '
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                    minLength: 1
+                  message:
+                    type: object
+                    required:
+                      - applicationStatus
+                    properties:
+                      applicationStatus:
+                        type: string
+                        description: ' スイッチング状態'
+                        enum:
+                          - '00'
+                          - '01'
+                          - '02'
+                          - '03'
+                required:
+                  - referenceId
+                  - message
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                    minLength: 1
+                  message:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        minLength: 1
+                    required:
+                      - error
+                required:
+                  - referenceId
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                    minLength: 1
+                  message:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        minLength: 1
+                    required:
+                      - error
+                required:
+                  - referenceId
+                  - message
+      description: Check switching status through applicationNumber retruned from `Apply for switch service`
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicationNumber:
+                  type: string
+                  description: 申込番号
+              required:
+                - applicationNumber
 components:
   schemas: {}

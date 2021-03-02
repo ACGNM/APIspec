@@ -19,18 +19,23 @@ paths:
                 supplyPointNumber:
                   type: string
                   description: 供給地点特定番号
-                  pattern: '^[0-9]{22,}$'
+                  pattern: '^[0-9]*$'
+                  minLength: 22
+                  maxLength: 22
                 retailerCode:
                   type: string
                   description: 小売事業者コード
-                  pattern: '^[a-zA-Z0-9]{5,}$'
+                  pattern: '^[a-zA-Z0-9]*$'
+                  minLength: 5
+                  maxLength: 5
                 retailerName:
                   type: string
                   description: 小売事業者名称
                   maxLength: 50
+                  minLength: 0
                 loginUserId:
                   type: string
-                  pattern: '^[a-zA-Z0-9]$'
+                  pattern: '^[a-zA-Z0-9]*$'
                   description: ログインユーザID
                   minLength: 7
                   maxLength: 7

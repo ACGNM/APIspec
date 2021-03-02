@@ -1,23 +1,55 @@
 openapi: 3.0.0
 info:
-  title: test
-  version: '1.0'
+  title: Biiiiip API sepc
+  version: '0.1'
   description: ''
 servers:
-  - url: 'http://{biiiiip.server}'
+  - url: 'https://{biiiiip.server}'
 paths:
   /applySwitching:
     post:
-      summary: Create New User
-      operationId: ''
+      summary: Apply for switch service
+      operationId: post-switching-application-form
       requestBody:
         content:
           application/json:
             schema:
               type: object
-            examples: {}
+              properties:
+                supplyPointNumber:
+                  type: string
+                retailerCode:
+                  type: string
+                retailerName:
+                  type: string
+                loginUserId:
+                  type: string
+                retailerStaff:
+                  type: string
+                retailerPhoneNumber:
+                  type: string
+                abolishTime:
+                  type: string
+                  format: date
+              required:
+                - supplyPointNumber
+                - retailerCode
+                - retailerName
+                - loginUserId
+                - retailerStaff
+                - retailerPhoneNumber
+                - abolishTime
+            examples:
+              example-1:
+                value:
+                  supplyPointNumber: string
+                  retailerCode: string
+                  '': string
         description: Post the necessary fields for the API to create a new user.
-      description: '  Apply for switching service provided by octto'
+      description: |-
+        - Apply for switching service provided by octto.
+        - Swith old electricity retailer to PIPI (abolish old and apply for new)
+        - Submit application only, need check switching status through `Check switching status`.
       responses:
         '202':
           description: Accepted
@@ -26,46 +58,13 @@ paths:
         '500':
           description: Internal Server Error
     parameters: []
+  /switchingStatus:
+    get:
+      summary: Check switching status
+      operationId: get-switching-status
+      responses:
+        '200':
+          description: OK
+      description: 'Check switching status through '
 components:
-  schemas:
-    User:
-      title: User
-      type: object
-      description: ''
-      x-examples:
-        Alice Smith:
-          id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+  schemas: {}

@@ -18,19 +18,33 @@ paths:
               properties:
                 supplyPointNumber:
                   type: string
+                  description: 供給地点特定番号
+                  pattern: '^[0-9]{22,}$'
                 retailerCode:
                   type: string
+                  description: 小売事業者コード
+                  pattern: '^[a-zA-Z0-9]{5,}$'
                 retailerName:
                   type: string
+                  description: 小売事業者名称
+                  maxLength: 50
                 loginUserId:
                   type: string
+                  pattern: '^[a-zA-Z0-9]{7,}$'
+                  description: ログインユーザID
                 retailerStaff:
                   type: string
+                  description: 小売事業者担当者氏名
+                  maxLength: 20
+                  minLength: 0
                 retailerPhoneNumber:
                   type: string
+                  pattern: '^[0-9]{6,}-[0-9]{4,}-[0-9]{4,}$'
+                  description: 小売事業者担当者連絡先電話番号（市外局番-市内局番-加入者番号）
                 abolishTime:
                   type: string
-                  format: date
+                  pattern: yyyyMMdd
+                  description: 接続供給廃止年月日。廃止の予定年月日。（yyyyMMdd形式）
               required:
                 - supplyPointNumber
                 - retailerCode
@@ -42,9 +56,13 @@ paths:
             examples:
               example-1:
                 value:
-                  supplyPointNumber: string
-                  retailerCode: string
-                  '': string
+                  supplyPointNumber: '0000111122223333444455'
+                  retailerCode: '12345'
+                  retailerName: テスト
+                  loginUserId: '1234567890'
+                  retailerStaff: biiiiip energe
+                  retailerPhoneNumber: 000000-0000-0000
+                  abolishTime: '20210301'
         description: Post the necessary fields for the API to create a new user.
       description: |-
         - Apply for switching service provided by octto.
@@ -53,10 +71,78 @@ paths:
       responses:
         '202':
           description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                    description: ''
+                  message:
+                    type: object
+                    properties:
+                      applicationNumber:
+                        type: string
+                        description: 照会用申込番号
+                    required:
+                      - applicationNumber
+                required:
+                  - referenceId
+              examples:
+                example-1:
+                  value:
+                    referenceId: 12345-abcde-12abc-34def
+                    message:
+                      applicationNumber: '1234567890000'
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                    minLength: 1
+                  message:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        minLength: 1
+                    required:
+                      - error
+                required:
+                  - referenceId
+                  - message
+              examples: {}
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                    minLength: 1
+                  message:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        minLength: 1
+                    required:
+                      - error
+                required:
+                  - referenceId
+                  - message
+              examples:
+                example-1:
+                  value: {}
     parameters: []
   /switchingStatus:
     get:

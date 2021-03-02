@@ -17,7 +17,7 @@ paths:
               type: object
             examples: {}
         description: Post the necessary fields for the API to create a new user.
-      description: Apply for switching service provided by octto
+      description: '  Apply for switching service provided by octto'
       responses:
         '202':
           description: Accepted

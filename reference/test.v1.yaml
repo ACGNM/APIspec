@@ -117,7 +117,12 @@ paths:
                 required:
                   - referenceId
                   - message
-              examples: {}
+              examples:
+                example-1:
+                  value:
+                    referenceId: 12345-abcde-12abc-34def
+                    message:
+                      error: Invalid applicationNumber
         '500':
           description: Internal Server Error
           content:
@@ -142,7 +147,10 @@ paths:
                   - message
               examples:
                 example-1:
-                  value: {}
+                  value:
+                    referenceId: 12345-abcde-12abc-34def
+                    message:
+                      error: Internal server error
     parameters: []
   /switchingStatus:
     get:
@@ -198,6 +206,12 @@ paths:
                 required:
                   - referenceId
                   - message
+              examples:
+                example-1:
+                  value:
+                    referenceId: 12345-abcde-12abc-34def
+                    message:
+                      error: Invalid applicationNumber
         '500':
           description: Internal Server Error
           content:
@@ -220,6 +234,12 @@ paths:
                 required:
                   - referenceId
                   - message
+              examples:
+                example-1:
+                  value:
+                    referenceId: 12345-abcde-12abc-34def
+                    message:
+                      error: Internal server error
       description: Check switching status through applicationNumber retruned from `Apply for switch service`
       requestBody:
         content:

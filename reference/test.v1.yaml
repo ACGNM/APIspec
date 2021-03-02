@@ -30,8 +30,10 @@ paths:
                   maxLength: 50
                 loginUserId:
                   type: string
-                  pattern: '^[a-zA-Z0-9]{7,}$'
+                  pattern: '^[a-zA-Z0-9]$'
                   description: ログインユーザID
+                  minLength: 7
+                  maxLength: 7
                 retailerStaff:
                   type: string
                   description: 小売事業者担当者氏名
